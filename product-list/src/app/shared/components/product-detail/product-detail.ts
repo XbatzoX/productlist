@@ -14,4 +14,8 @@ export class ProductDetail {
     "stock": 120,
     "price": 29.99
   }
+
+  deleteDetail():void{
+    this.detail.name = '';
+  }
 }

@@ -1,7 +1,8 @@
 <header class="main-header">    
     <h1 class="main-header__title">Produkte</h1>
-    <a class="btn btn--primary">
-        <span>Neues Produkt</span>
+    <a class="btn" [class.btn--primary]="path == ''" [class.btn--secondary]="path == 'detail'">
+        <span>{{btn_text}}</span>
+
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M6 8H1C0.716667 8 0.479167 7.90417 0.2875 7.7125C0.0958333 7.52083 0 7.28333
                 0 7C0 6.71667 0.0958333 6.47917 0.2875 6.2875C0.479167 6.09583 0.716667 6 1 6H6V1C6
