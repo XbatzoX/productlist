@@ -4,5 +4,5 @@ import { ProductList } from './shared/components/product-list/product-list';
 
 export const routes: Routes = [
     {path:'', component:ProductList},
-    {path:"detail", component: ProductDetail}
+    {path:"detail/:name", component: ProductDetail}
 ];

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-detail',
@@ -7,6 +8,13 @@ import { Component } from '@angular/core';
   styleUrl: './product-detail.scss',
 })
 export class ProductDetail {
+
+  private route = inject(ActivatedRoute);
+  ngOnInit(){
+    let currentName = this.route.snapshot.paramMap.get('name');
+    if(currentName){this.detail.name = currentName;}
+  }
+
   detail = {
     "name": "Gaming Maus",
     "description": "Eine ergonomische Gaming-Maus mit hoher Präzision und einstellbarer DPI. Ideal für FPS- und MOBA-Spiele, bietet sie eine langlebige Bauweise und komfortable Seitentasten für schnelles Reagieren.",
