@@ -1,0 +1,65 @@
+<!-- <section class="product-form">
+    <header class="product-form__header">
+        <h1>Produkt erstellen</h1>
+        <a href="" class="btn--close"></a>
+    </header>
+    <form>
+        <fieldset class="product-form__fieldset--vert">
+            <legend>Product Information</legend>
+            <label for="product-name">Produkt Name:</label>
+            <input type="text" id="product-name" />
+            <label for="description">Beschreibung:</label>
+            <textarea id="description" name="description" rows="4"></textarea>
+        </fieldset>
+        <fieldset class="product-form__fieldset--hori">
+            <legend>Stock &amp; Pricing</legend>
+            <label for="stock">Lagerbestand:</label>
+            <input type="number" id="stock" name="stock" />
+            <label for="price">Preis pro Stück (€):</label>
+            <input type="number" id="price" name="price" step="0.01" />
+        </fieldset>
+        <button class="btn btn--primary">Produkt hinzufügen</button>
+    </form>
+</section>
+
+für Fehlermeldungen:
+<p class="product-form__error">Fehler:</p>
+<p class="product-form__error">
+    Deine Fehlermeldung
+</p> -->
+
+<article class="product-detail">
+    <header class="product-detail__header">
+        <h1>Computermaus HP 100</h1>
+        <div>
+            <a class="btn--edit" aria-label="Details editieren"></a>
+            <button class="btn--delete" aria-label="Details löschen"></button>
+        </div>
+    </header>
+    <section aria-labelledby="description">
+        <h2 id="description">Beschreibung</h2>
+        <ul>
+            <li>Kabelgebunden optische USB-Maus mit 1600 DPI, 3 Tasten.</li>
+            <li>Ergonomisches Design, Plug &amp; Play, für PC, Laptop, Windows, macOS  Schwarz.</li>
+            <li>Stil: Rechtshänder / Linkshänder.</li>
+        </ul>
+    </section>
+    <section aria-labelledby="specs">
+        <h2 id="specs">Spezifikationen</h2>
+        <p>
+            optisch, USB-Anschluss, schwarz
+        </p>
+    </section>
+    <section>
+        <dl>
+            <dt>Lagerbestand:</dt>
+            <dd>
+                <data value="104">104 Stück</data>
+            </dd>
+            <dt>Preis pro Stück (€):</dt>
+            <dd>
+                <data value="18.00">18,00</data>
+            </dd>
+        </dl>
+    </section>
+</article>
