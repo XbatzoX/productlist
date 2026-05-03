@@ -7,6 +7,19 @@ import { Product } from '../interfaces/product';
 export class Products {
   productlist: Product[] = [];
 
+  productdetail: Product = {
+    "name": "n/a",
+    "description": "n/a",
+    "specs": "n/a",
+    "stock": 0,
+    "price": 0
+  }
+
+  setProductDetailByName(name:string){
+    let tmpProduct = this.productlist.find(product => product.name == name);
+    if(tmpProduct){this.productdetail = tmpProduct;}
+  }
+
   constructor(){
     this.productlist = [
       {
