@@ -30,7 +30,7 @@ für Fehlermeldungen:
 
 <article class="product-detail">
     <header class="product-detail__header">
-        <h1>{{detail.name}}</h1>
+        <h1>{{detail().name}}</h1>
         <div>
             <a class="btn--edit" aria-label="Details editieren"></a>
             <button (click)="deleteDetail()" class="btn--delete" aria-label="Details löschen"></button>
@@ -39,24 +39,24 @@ für Fehlermeldungen:
     <section aria-labelledby="description">
         <h2 id="description">Beschreibung</h2>
         <p>
-            {{detail.description}}
+            {{detail().description}}
         </p>
     </section>
     <section aria-labelledby="specs">
         <h2 id="specs">Spezifikationen</h2>
         <p>
-            {{detail.specs}}
+            {{detail().specs}}
         </p>
     </section>
     <section>
         <dl>
             <dt>Lagerbestand:</dt>
             <dd>
-                <data value="104">{{detail.stock}} Stück</data>
+                <data value="104">{{detail().stock}} Stück</data>
             </dd>
             <dt>Preis pro Stück (€):</dt>
             <dd>
-                <data value="18.00">{{detail.price}}</data>
+                <data value="18.00">{{detail().price}}</data>
             </dd>
         </dl>
     </section>

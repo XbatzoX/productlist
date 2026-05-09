@@ -13,21 +13,14 @@ export class ProductDetail {
   private route = inject(ActivatedRoute);
   productService = inject(Products);
 
+  detail = this.productService.productdetail;
+
   ngOnInit(){
     let currentName = this.route.snapshot.paramMap.get('name');
     if(currentName){this.productService.setProductDetailByName(currentName);}
-    this.detail = this.productService.productdetail;
-  }
-
-  detail = {
-    "name": "n/a",
-    "description": "n/a",
-    "specs": "n/a",
-    "stock": 0,
-    "price": 0
   }
 
   deleteDetail():void{
-    this.detail.name = '';
+    // this.detail.name = '';
   }
 }
