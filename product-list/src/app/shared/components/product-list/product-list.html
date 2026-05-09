@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody>     
-            @for (item of list; track item.name; let index = $index) {
+            @for (item of list(); track item.name; let index = $index) {
             <tr [routerLink]="['detail', item.name]" role="link">
                 <td>{{item.name}}</td>
                 <td>{{item.specs}}</td>

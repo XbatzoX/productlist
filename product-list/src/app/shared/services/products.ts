@@ -5,7 +5,9 @@ import { Product } from '../interfaces/product';
   providedIn: 'root',
 })
 export class Products {
-  productlist: Product[] = [];
+  // productlist: Product[] = [];
+
+  productlist = signal<Product[]>([]);
 
   productdetail = signal<Product>({
     "name": "n/a",
@@ -16,7 +18,8 @@ export class Products {
   })
 
   setProductDetailByName(name:string){
-    let tmpProduct = this.productlist.find(product => product.name == name);
+    // let tmpProduct = this.productlist.find(product => product.name == name);
+    let tmpProduct = this.productlist().find(product => product.name == name);
     if(tmpProduct){this.productdetail.set(tmpProduct);}
 
     setTimeout(() => {
@@ -25,7 +28,7 @@ export class Products {
   }
 
   constructor(){
-    this.productlist = [
+    this.productlist.set([
       {
         "name": "Gaming Maus",
         "description": "Eine ergonomische Gaming-Maus mit hoher Präzision und einstellbarer DPI. Ideal für FPS- und MOBA-Spiele, bietet sie eine langlebige Bauweise und komfortable Seitentasten für schnelles Reagieren.",
@@ -68,6 +71,6 @@ export class Products {
         "stock": 150,
         "price": 59.95
       }
-    ];
+    ]);
   }
 }
