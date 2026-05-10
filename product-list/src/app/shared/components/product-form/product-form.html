@@ -8,6 +8,19 @@
             <legend>Product Information</legend>
             <label for="product-name">Produkt Name:</label>
             <input type="text" id="product-name" formControlName="name"/>
+            @if(productForm.get('name')?.hasError('required')){
+                <p class="product-form__error">Fehler:</p>
+                <p class="product-form__error">
+                    Bitte gib einen Namen ein.
+                </p>
+            }
+            @if(productForm.get('name')?.hasError('minlength')){
+                <p class="product-form__error">Fehler:</p>
+                <p class="product-form__error">
+                    Der Name muss min. 3 Zeichen lang sein.
+                </p>
+            }
+
             <label for="description">Beschreibung:</label>
             <textarea id="description" name="description" rows="4" formControlName="description"></textarea>
         </fieldset>
@@ -15,8 +28,33 @@
             <legend>Stock &amp; Pricing</legend>
             <label for="stock">Lagerbestand:</label>
             <input type="number" id="stock" name="stock" formControlName="stock"/>
+            @if(productForm.get('stock')?.hasError('required')){
+                <p class="product-form__error">Fehler:</p>
+                <p class="product-form__error">
+                    Bitte gib einen Wert ein.
+                </p>
+            }
+            @if(productForm.get('stock')?.hasError('min')){
+                <p class="product-form__error">Fehler:</p>
+                <p class="product-form__error">
+                    Der Wert muss positiv sein.
+                </p>
+            }
+
             <label for="price">Preis pro Stück (€):</label>
             <input type="number" id="price" name="price" step="0.01" formControlName="price"/>
+            @if(productForm.get('price')?.hasError('required')){
+                <p class="product-form__error">Fehler:</p>
+                <p class="product-form__error">
+                    Bitte gib einen Betrag ein.
+                </p>
+            }
+            @if(productForm.get('price')?.hasError('min')){
+                <p class="product-form__error">Fehler:</p>
+                <p class="product-form__error">
+                    Der Betrag muss positiv sein.
+                </p>
+            }
         </fieldset>
         <button type="submit" class="btn btn--primary">Produkt hinzufügen</button>
     </form>
