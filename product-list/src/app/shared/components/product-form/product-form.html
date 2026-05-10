@@ -1,0 +1,28 @@
+<section class="product-form">
+    <header class="product-form__header">
+        <h1>Produkt erstellen</h1>
+        <a href="" class="btn--close"></a>
+    </header>
+    <form>
+        <fieldset class="product-form__fieldset--vert">
+            <legend>Product Information</legend>
+            <label for="product-name">Produkt Name:</label>
+            <input type="text" id="product-name" />
+            <label for="description">Beschreibung:</label>
+            <textarea id="description" name="description" rows="4"></textarea>
+        </fieldset>
+        <fieldset class="product-form__fieldset--hori">
+            <legend>Stock &amp; Pricing</legend>
+            <label for="stock">Lagerbestand:</label>
+            <input type="number" id="stock" name="stock" />
+            <label for="price">Preis pro Stück (€):</label>
+            <input type="number" id="price" name="price" step="0.01" />
+        </fieldset>
+        <button class="btn btn--primary">Produkt hinzufügen</button>
+    </form>
+</section>
+<!-- für Fehlermeldungen:
+<p class="product-form__error">Fehler:</p>
+<p class="product-form__error">
+Deine Fehlermeldung
+</p> -->
