@@ -10,8 +10,8 @@
             </tr>
         </thead>
         <tbody>     
-            @for (item of list(); track item.name; let index = $index) {
-            <tr [routerLink]="['detail', item.name]" role="link">
+            @for (item of list(); track item.id; let index = $index) {
+            <tr [routerLink]="['detail', item.id]" role="link">
                 <td>{{item.name}}</td>
                 <td>{{item.specs}}</td>
                 <td><span class="badge ok">{{item.stock}}</span></td>
