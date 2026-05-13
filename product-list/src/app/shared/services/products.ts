@@ -40,6 +40,7 @@ export class Products {
     .from('products')
     .select('*')
     console.log(response.data);
+    this.productlist.set((response.data ?? []) as Product[]);
   }
 
   constructor(){
