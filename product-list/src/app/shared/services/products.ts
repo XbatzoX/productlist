@@ -1,10 +1,14 @@
 import { Injectable, signal } from '@angular/core';
 import { Product } from '../interfaces/product';
+import { createClient } from '@supabase/supabase-js'
 
 @Injectable({
   providedIn: 'root',
 })
 export class Products {
+  supabase = createClient('https://knosbttzvwpgfqcajgja.supabase.co', 'sb_publishable_SD-N7dUmg29qihR6IBxOrw_RjPnCtMM');
+
+
   // productlist: Product[] = [];
 
   productlist = signal<Product[]>([]);
@@ -31,7 +35,15 @@ export class Products {
     // },2000);
   }
 
+  async getAllProducts(){
+    let response = await this.supabase
+    .from('products')
+    .select('*')
+    console.log(response.data);
+  }
+
   constructor(){
+    this.getAllProducts();
     this.productlist.set([
       {
         "name": "Gaming Maus",
