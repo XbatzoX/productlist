@@ -46,7 +46,10 @@ export class Products {
       'postgres_changes',
       { event: 'DELETE', schema: 'public', table: 'products' },
       (payload) => {
-        console.log('Change received!', payload)
+        // console.log('Change received!', payload)
+        // let tmpProduct = new ProductModel(payload.old);
+        let tmpProductId = payload.old['id'];
+        this.productlist.update(list => list.filter(product => product.id != tmpProductId));
       }
     )
     .subscribe()
@@ -130,5 +133,10 @@ export class Products {
     this.productlist.set((response.data ?? []) as Product[]);
   }
 
-  
+  async deleteProduct(id:number){
+    const { error } = await this.supabase
+    .from('products')
+    .delete()
+    .eq('id', id)
+  }  
 }

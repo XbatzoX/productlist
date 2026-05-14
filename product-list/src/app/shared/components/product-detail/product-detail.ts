@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Products } from '../../services/products';
 
 @Component({
@@ -11,6 +11,7 @@ import { Products } from '../../services/products';
 export class ProductDetail {
 
   private route = inject(ActivatedRoute);
+  router = inject(Router);
   productService = inject(Products);
 
   detail = this.productService.productdetail;
@@ -20,7 +21,9 @@ export class ProductDetail {
     if(currentId){this.productService.setProductDetailById(currentId);}
   }
 
-  deleteDetail():void{
+  async deleteDetail(){
     // this.detail.name = '';
+    this.productService.deleteProduct(this.detail().id);
+    this.router.navigate([""]);
   }
 }
