@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { Product } from '../interfaces/product';
 import { createClient } from '@supabase/supabase-js'
+import { ProductModel } from '../models/productmodel';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,9 @@ export class Products {
 
   productlist = signal<Product[]>([]);
 
+  productlistInsertChannel;
+  productlistDeleteChannel;
+
   productdetail = signal<Product>({
     "id": 0,
     "name": "n/a",
@@ -22,30 +26,30 @@ export class Products {
     "price": 0
   })
 
-  addProduct(product:Product){
-    this.productlist.update(list => [...list, product]);
-  }
-
-  setProductDetailByName(name:string){
-    // let tmpProduct = this.productlist.find(product => product.name == name);
-    let tmpProduct = this.productlist().find(product => product.name == name);
-    if(tmpProduct){this.productdetail.set(tmpProduct);}
-
-    // setTimeout(() => {
-    //   this.productdetail.update(product => ({...product, description:'banana'}));
-    // },2000);
-  }
-
-  async getAllProducts(){
-    let response = await this.supabase
-    .from('products')
-    .select('*')
-    console.log(response.data);
-    this.productlist.set((response.data ?? []) as Product[]);
-  }
-
   constructor(){
     this.getAllProducts();
+
+    this.productlistInsertChannel = this.supabase.channel('custom-insert-channel')
+    .on(
+      'postgres_changes',
+      { event: 'INSERT', schema: 'public', table: 'products' },
+      (payload) => {
+        let tmpProduct = new ProductModel(payload.new);
+        this.productlist.update(list => [...list, tmpProduct]);
+        // console.log('Change received!', payload.new);
+      }
+    )
+    .subscribe()
+
+    this.productlistDeleteChannel = this.supabase.channel('custom-delete-channel')
+    .on(
+      'postgres_changes',
+      { event: 'DELETE', schema: 'public', table: 'products' },
+      (payload) => {
+        console.log('Change received!', payload)
+      }
+    )
+    .subscribe()
     // this.productlist.set([
     //   {
     //     "name": "Gaming Maus",
@@ -91,4 +95,40 @@ export class Products {
     //   }
     // ]);
   }
+
+  ngOnDestroy(){
+    this.supabase.removeChannel(this.productlistInsertChannel);
+    this.supabase.removeChannel(this.productlistDeleteChannel);
+  }
+
+  async addProduct(product:ProductModel){
+    // console.log(product.getCleanAddJson());
+    const product_data = product.getCleanAddJson();
+    const { data, error } = await this.supabase
+    .from('products')
+    .insert([
+      product_data
+    ])
+    .select()
+  }
+
+  setProductDetailById(id:number){
+    // let tmpProduct = this.productlist.find(product => product.name == name);
+    let tmpProduct = this.productlist().find(product => product.id == id);
+    if(tmpProduct){this.productdetail.set(tmpProduct);}
+
+    // setTimeout(() => {
+    //   this.productdetail.update(product => ({...product, description:'banana'}));
+    // },2000);
+  }
+
+  async getAllProducts(){
+    let response = await this.supabase
+    .from('products')
+    .select('*')
+    // console.log(response.data);
+    this.productlist.set((response.data ?? []) as Product[]);
+  }
+
+  
 }
